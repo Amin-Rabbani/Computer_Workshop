@@ -22,10 +22,9 @@ class OPTIONS:
 
 
 def print_response(msg: dict):
-	print("############################################################")
 	for key, value in msg.items():
 		print(": ".join([str(key), str(value)]))
-	print("############################################################")
+
 
 def main():
 
@@ -34,6 +33,8 @@ def main():
 		print(OPTIONS.OTHER_TZ)
 		option = int(input(MESSAGES.OPTION_GETTER))
 		final_url = ''
+
+		print("############################################################")
 
 		if option == 1:
 			url_list = [KEYS.URL, KEYS.IP_KEY]
@@ -48,22 +49,20 @@ def main():
 
 		else:
 
-			print("############################################################")
+			
 			print(MESSAGES.INVALID_OPTION)
-			print("############################################################")
 			continue
 		
 		res = requests.get(final_url)
 		
 		if res.status_code == 404:
-			print("############################################################")
 			print(MESSAGES.INVALID_TIMEZONE)
-			print("############################################################")
 			continue
 
 		true_res = json.loads(res.text)
-		# print(msg)
 		print_response(true_res)
+
+		print("############################################################")
 
 
 if __name__ == '__main__':
